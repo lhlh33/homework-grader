@@ -1,0 +1,17 @@
+{
+  "folder": "D:\\研究生\\作业批改\\react-grader-prototype\\sample-data\\hw1",
+  "recursive": true,
+  "roster": {
+    "2024010001": "Alice",
+    "2024010002": "Bob",
+    "2024010003": "Carol"
+  },
+  "records": {
+    "2024010001_Alice_1.txt": {
+      "filename": "2024010001_Alice_1.txt",
+      "score": "95",
+      "comment": "good",
+      "status": "???"
+    }
+  }
+}

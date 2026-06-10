@@ -1,0 +1,52 @@
+# 依赖
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Rust 构建产物
+src-tauri/target/
+
+# 前端构建产物
+dist/
+.vite-cache/
+
+# PyInstaller 构建产物
+dist_exe/
+dist_tauri/
+build_backend/
+build_exe/
+release_portable/
+
+# 旧版打包输出
+HomeworkGraderPro_windows/
+HomeworkGraderPro_windows.zip
+
+# Sidecar 二进制（构建产物，应在构建脚本中重新生成）
+src-tauri/binaries/
+
+# 环境变量
+.env
+
+# 日志
+*.log
+uvicorn.log
+uvicorn.err.log
+uvicorn.out.log
+dev.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# PyInstaller 自动生成的 spec
+HomeworkGraderBackend.spec
+
+# Claude Code
+.claude/

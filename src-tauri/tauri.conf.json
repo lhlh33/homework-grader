@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Homework Grader Desktop",
+  "version": "0.1.0",
+  "identifier": "com.homework.grader.desktop",
+  "build": {
+    "beforeDevCommand": {
+      "script": "npm run dev:tauri",
+      "cwd": ".."
+    },
+    "beforeBuildCommand": {
+      "script": "npm run build:tauri-release",
+      "cwd": ".."
+    },
+    "frontendDist": "../dist",
+    "devUrl": "http://127.0.0.1:14273"
+  },
+  "app": {
+    "security": {
+      "csp": {
+        "default-src": "'self' customprotocol: asset:",
+        "connect-src": "ipc: http://ipc.localhost http://127.0.0.1:8765 http://localhost:8765 'self' blob:",
+        "img-src": "'self' asset: http://asset.localhost blob: data:",
+        "style-src": "'unsafe-inline' 'self'",
+        "worker-src": "'self' blob:"
+      }
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "Homework Grader Desktop",
+        "width": 1600,
+        "height": 1100,
+        "resizable": true
+      }
+    ]
+  },
+  "bundle": {
+    "active": true,
+    "icon": [
+      "icons/icon.ico"
+    ],
+    "externalBin": [
+      "binaries/HomeworkGraderBackend"
+    ]
+  }
+}
