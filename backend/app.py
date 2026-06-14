@@ -84,12 +84,32 @@ def normalize_path_key(path_or_name: Any) -> str:
     return clean_text(path_or_name).replace("\\", "/").strip()
 
 
-def extract_student_id(filename: Any) -> str:
-    name = safe_basename(filename)
-    match = re.match(r"^\s*(\d+)", name)
-    if match:
-        return match.group(1)
-    return safe_stem(name)
+def extract_student_id(path_or_name: Any) -> str:
+    """从相对路径中提取学号：遍历每一层目录和文件名，返回最长的数字匹配。
+
+    规则（按优先级）：
+    1. 每层路径片段的开头连续数字（>=1位）
+    2. 每层路径片段中 >=4 位的连续数字（兼容"张三_2024010001"）
+    3. 取所有候选中长度最长的
+    4. 兜底：文件名的 stem
+    """
+    text = clean_text(path_or_name).replace("\\", "/")
+    best = ""
+    for part in text.split("/"):
+        stem = os.path.splitext(part)[0]
+        # 前缀数字
+        prefix = re.match(r"^\s*(\d+)", stem)
+        if prefix:
+            candidate = prefix.group(1)
+            if len(candidate) > len(best):
+                best = candidate
+        # 非前缀但 >=4 位的数字串
+        for m in re.finditer(r"\d{4,}", stem):
+            if len(m.group()) > len(best):
+                best = m.group()
+    if best:
+        return best
+    return safe_stem(safe_basename(text))
 
 
 def normalize_student_id(value: Any) -> str:
